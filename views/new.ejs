@@ -1,0 +1,76 @@
+<%- include('partials/header.ejs'); %>
+
+<% if (locals.book) { %>
+    <form action="/edit/<%= book.id %>" method="post">
+        <input type="text" name="title" value="<%= book.title %>" autofocus="true">
+        <textarea name="notes" cols="30" rows="10"><%= book.notes %></textarea>
+        <input type="text" name="author" value="<%= book.author %>">
+        
+        <div class="star-rating">
+            <input type="radio" id="st-5" value="5" name="rating">
+            <label for="st-5">
+                <span class="fa fa-star"></span>
+            </label>
+            <input type="radio" id="st-4" value="4" name="rating">
+            <label for="st-4">
+                <span class="fa fa-star"></span>
+            </label>
+            <input type="radio" id="st-3" value="3" name="rating">
+            <label for="st-3">
+                <span class="fa fa-star"></span>
+            </label>
+            <input type="radio" id="st-2" value="2" name="rating">
+            <label for="st-2">
+                <span class="fa fa-star"></span>
+            </label>
+            <input type="radio" id="st-1" value="1" name="rating" required> 
+            <label for="st-1">
+                <span class="fa fa-star"></span>
+            </label>
+        </div>
+
+        <input type="text" name="isbn" value="<%= book.isbn %>">
+        <button type="submit">Save</button>
+    </form>
+
+    <script>
+        function ratingHandler(){
+            document.querySelector('.star-rating input#st-<%= book.rating %>').checked = true;;
+        }
+        ratingHandler();
+    </script>
+
+<% } else { %>
+    <form action="/add" method="post">
+        <input type="text" name="title" autofocus="true" required>
+        <textarea name="notes" cols="30" rows="10"></textarea>
+        <input type="text" name="author">
+        <div class="star-rating">
+            <input type="radio" id="st-5" value="5" name="rating">
+            <label for="st-5">
+                <span class="fa fa-star"></span>
+            </label>
+            <input type="radio" id="st-4" value="4" name="rating">
+            <label for="st-4">
+                <span class="fa fa-star"></span>
+            </label>
+            <input type="radio" id="st-3" value="3" name="rating">
+            <label for="st-3">
+                <span class="fa fa-star"></span>
+            </label>
+            <input type="radio" id="st-2" value="2" name="rating">
+            <label for="st-2">
+                <span class="fa fa-star"></span>
+            </label>
+            <input type="radio" id="st-1" value="1" name="rating" required> 
+            <label for="st-1">
+                <span class="fa fa-star"></span>
+            </label>
+        </div>
+        <input type="text" name="isbn">
+        <button type="submit">Save</button>
+    </form>  
+<% } %>
+
+
+<%- include('partials/footer.ejs'); %>

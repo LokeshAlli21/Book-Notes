@@ -1,0 +1,29 @@
+/* star-rating styles */
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse; /* Change to row-reverse */
+    align-items: center;
+    justify-content: center;
+    /* gap: 20px; */
+}
+
+/* Hide the radio buttons */
+.star-rating input[type=radio] {
+    position: fixed;
+    opacity: 0;
+}
+
+/* Style the star icons */
+.star-rating label {
+    cursor: pointer;
+}
+
+.star-rating .fa {
+    font-size: 30px;
+    color: grey;
+}
+
+/* Style the star icons when a radio button is checked */
+.star-rating input[type=radio]:checked ~ label .fa {
+    color: gold;
+}

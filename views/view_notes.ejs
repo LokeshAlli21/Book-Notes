@@ -1,0 +1,13 @@
+<%- include('partials/header.ejs'); %>
+
+<img src="https://covers.openlibrary.org/b/isbn/<%= book.isbn %>-M.jpg" alt="Image for <%= book.title %>">
+<h1><%= book.title %></h1>
+<h1><%= book.notes %></h1>
+<h1><%= book.author %></h1>
+<h1><%= book.rating %></h1>
+<h1><%= book.isbn %></h1>
+<h1><%= book.date %></h1>
+<a href="/edit/<%= book.id %>">Edit</a>
+<a href="/delete/<%= book.id %>">Delete</a>
+
+<%- include('partials/footer.ejs'); %>

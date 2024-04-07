@@ -1,0 +1,25 @@
+<%- include('partials/header.ejs'); %>
+
+<hr>
+<a href="/add">Add new</a>
+<hr>
+<% books.forEach( b => { %>
+    <img src="https://covers.openlibrary.org/b/isbn/<%= b.isbn %>-M.jpg" alt="Image for <%= b.title %>">
+    <h1><%= b.title %></h1>
+    <% if(b.notes.length > 100){ %> 
+        <h1><%= b.notes.substring(0, 100); %> 
+            <a href="/book/<%= b.id %>">Read More</a> 
+        </h1>
+    <% } else { %> 
+        <h1><%= b.notes %></h1>
+    <% } %>
+    <h1><%= b.author %></h1>
+    <h1><%= b.rating %></h1>
+    <h1><%= b.isbn %></h1>
+    <h1><%= b.date %></h1>
+    <a href="/edit/<%= b.id %>">Edit</a>
+    <a href="/delete/<%= b.id %>">Delete</a>
+    <hr>
+<%}); %>
+
+<%- include('partials/footer.ejs'); %>
