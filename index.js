@@ -41,24 +41,38 @@ app.get('/edit/:id', (req, res) => {
     res.render('new.ejs', {book: book});
 });
 
-app.post('/edit/:id', (req, res) => {
+app.post('/edit/:id',async (req, res) => {
     const id = parseInt(req.params.id);
 
-    const index = books.findIndex( b => b.id == id);
+    if (id > 0) {
+        
+        let query = 'UPDATE books SET id = $1';
+        let val = [id];
 
-    const existingBook = books[index];
+        const fieldsToUpdate = ['title', 'author', 'rating', 'notes', 'isbn'];
 
-    const book = {
-        id: existingBook.id,
-        title: req.body.title || existingBook.title, 
-        author: req.body.author || existingBook.author, 
-        rating: req.body.rating || existingBook.rating, 
-        notes: req.body.notes || existingBook.notes, 
-        isbn: req.body.isbn || existingBook.isbn, 
-        date: 'edited on : ' + new Date()
-    };
+        fieldsToUpdate.forEach(field => {
+            if (req.body[field]) {
+                query += `, ${field} = $${val.length + 1}`;
+                val.push(field === 'rating' ? parseInt(req.body[field]) : req.body[field]);
+            }
+        });
 
-    books[index] = book;
+        query += ' WHERE id = $1';
+
+        // console.log(query, val);
+
+        try {
+            await db.query(query, val);
+        } catch (err) {
+            console.log('Error updating book:', err.stack);
+        }
+
+
+    } else {
+        console.log('Invalid ID!');
+    }
+
 
     res.redirect('/');
     
@@ -86,13 +100,17 @@ app.post('/add',async (req, res) => {
     res.redirect('/');
 });
 
-app.get('/delete/:id', (req, res) => {
+app.get('/delete/:id',async (req, res) => {
     const id = parseInt(req.params.id);
-    console.log(books);
-    const index = books.findIndex( b => b.id == id);
 
-    if(index !== -1){
-        books.splice(index, 1);
+    if (id > 0) {
+        try {
+            await db.query('delete from books where id =$1', [id]);
+        } catch (err) {
+            console.log('error deleting data!', err.stack);
+        }
+    } else {
+        console.log('Invalid ID!');
     }
 
     res.redirect('/');
@@ -103,11 +121,6 @@ app.get('/book/:id', (req, res) => {
     const id = parseInt(req.params.id);
     const book = books.find( b => b.id == id);
     res.render('view_notes.ejs', {book: book});
-});
-
-app.post('/radio', (req, res) => {
-    console.log(req.body.rating);
-    res.redirect('/');
 });
 
 app.listen(port, () => {
