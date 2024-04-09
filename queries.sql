@@ -13,9 +13,9 @@ ADD CONSTRAINT rating_range_check CHECK (rating > 0 AND rating <= 10);
 
 INSERT INTO books (title, notes, author, rating, isbn, date) 
 VALUES 
-    ('Book Title 1', 'Some notes about Book 1', 'Author 1', 5, '1234567890', '2024-04-07'),
-    ('Book Title 2', 'Some notes about Book 2', 'Author 2', 4, '0987654321', '2024-04-08'),
-    ('Book Title 3', 'Some notes about Book 3', 'Author 3', 2, '9876543210', '2024-04-09');
+    ('Book Title 2', 'I read a lot of books but after I finish reading them I often do not remember all the most salient parts of the book. So I started taking notes. This capstone project is built on this idea. My friend Derek Sivers has this fantastic website where he has all the non-fiction books he has read, his notes, his ratings and when he read them. The books are sortable by rating, recency and title. Its a such cool idea for a project so Im including it as a capstone here in this course.', 'Author 2', 4, '0987654321', '2024-04-08'),
+    ('Book Title 2', 'I read a lot of books but after I finish reading them I often do not remember all the most salient parts of the book. So I started taking notes. This capstone project is built on this idea. My friend Derek Sivers has this fantastic website where he has all the non-fiction books he has read, his notes, his ratings and when he read them. The books are sortable by rating, recency and title. Its a such cool idea for a project so Im including it as a capstone here in this course.', 'Author 2', 4, '0987654321', '2024-04-08'),
+    ('Book Title 2', 'I read a lot of books but after I finish reading them I often do not remember all the most salient parts of the book. So I started taking notes. This capstone project is built on this idea. My friend Derek Sivers has this fantastic website where he has all the non-fiction books he has read, his notes, his ratings and when he read them. The books are sortable by rating, recency and title. Its a such cool idea for a project so Im including it as a capstone here in this course.', 'Author 2', 4, '0987654321', '2024-04-08');
 
 Drop the existing constraint
 ALTER TABLE books DROP CONSTRAINT rating_range_check;
@@ -27,4 +27,4 @@ ADD CONSTRAINT rating_range_check CHECK (rating >= 0 AND rating <= 5);
 select * from books;
 
 
-update books set id = 13 where id = 13;
+update books set title = 'HOW TO WIN FRIENDS AND INFLUENCE PEOPLE';

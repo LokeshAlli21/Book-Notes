@@ -1,3 +1,59 @@
+/* import google font  */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* color variables */
+:root {
+    /* Primary colors */
+    --primary-color: #007bff; /* Blue */
+    --secondary-color: #6c757d; /* Gray */
+    
+    /* Text colors */
+    --text-color: #333; /* Dark Gray */
+    --link-color: #007bff; /* Blue */
+    
+    /* Background colors */
+    --background-color: #e1e3e6; /* Background color */
+    --card-background-color: #fff; /* Card background color */
+    
+    --accent-color: #ffc107; /* Yellow */
+    
+    --shadow-color: rgba(0, 0, 0, 0.1); /* Box shadow color */
+    --border-color: #dfdfdf; /* Border color */
+}
+
+/* ---------------------------------------------------------------------------------------- */
+/* body styles */
+* , ::after, ::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: space-around; */
+    margin: 0 auto;
+    gap: 3vh;
+}
+
+a{
+    text-decoration: none;
+}
+
+li{
+    list-style: none;
+}
+/* ---------------------------------------------------------------------------------------- */
 /* star-rating styles */
 .star-rating {
     display: flex;
@@ -21,9 +77,257 @@
 .star-rating .fa {
     font-size: 30px;
     color: grey;
+    transition: all 0.2s ease-in-out;
 }
 
 /* Style the star icons when a radio button is checked */
 .star-rating input[type=radio]:checked ~ label .fa {
     color: gold;
 }
+
+
+/* ---------------------------------------------------------------------------------------- */
+/* index.ejs styles */
+.main-section{
+    position: relative;
+    top: 2vh;
+}
+
+.book-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    max-width: 45vw;
+    gap: 1rem;
+    background-color: var(--card-background-color);
+    /* height: fit-content; */
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.book-content:hover {
+    box-shadow: 0 0 10px var(--shadow-color);
+    scale: 1.03;
+}
+.book-notes {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: max-content;
+    gap: 1rem;
+    margin-right: 1rem;
+}
+.book-notes a {
+    text-decoration: none;
+    color: var(--text-colorz);
+    font-size: 14px;
+}
+.book-notes h2 {
+    align-self: center;
+}
+.book-notes .date {
+    align-self: flex-end;
+}
+.book-notes p {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.info-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: last baseline;
+    justify-content: space-between;
+}
+.bottom-row {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    border-top: 2px solid var(--border-color);
+}
+.book-img{
+    display: block;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0 0;
+}
+.book-img img {
+    height: auto;
+}
+.author {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.date {
+    font-size: 14px;
+    color: var(--secondary-color);
+}
+
+.bottom-row h1 {
+    font-size: 20px;
+    margin: 0;
+}
+
+/* ---------------------------------------------------------------------------------------- */
+/* btn CSS */
+.btn {
+    background: transparent;
+    border: 2px solid var(--accent-color);
+    border-radius: 5px;
+    /* color: #FFFFFF; */
+    cursor: pointer;
+    display:table-row-group;
+    font-weight: 800;
+    /* line-height: normal; */
+    margin: 5px 5px;
+    transition: 0.2s ease-in;
+    outline: none;
+    padding: 7px 12px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    will-change: transform;
+  }
+  
+  .btn:disabled {
+    pointer-events: none;
+  }
+  
+  .btn:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0 2px 5px;
+    /* transform: translateY(-2px); */
+    background-color: var(--accent-color);
+  }
+  
+  .btn:active {
+    box-shadow: none;
+    transform: translateY(0);
+  }
+  p .btn {
+    display: contents;
+  }
+  p .btn:hover{
+    color: var(--accent-color);
+  }
+
+  /* ---------------------------------------------------------------------------------------- */
+  /* navbar styles */
+  nav{
+    width:100%;
+    background-color: var(--secondary-color);
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10000;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  nav .container{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+  nav ul{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-around;
+    gap: 5vw;
+  }
+
+  nav a{
+    color: var(--background-color);
+    font-weight: 600;
+    font-size: 1.2rem;
+    transition: add 0.2s ease-in-out;
+  }
+  nav a:hover{
+    color: var(--text-color)
+  }
+
+  nav .btn:hover{
+    .btn-add{
+        color: var(--text-color);
+    }
+  }
+
+  nav .logo{
+    color: #FFF;
+    font-size: 1rem;
+  }
+ nav .toggle-close,.toggle-open {
+    display: none;
+    font-size: 2rem;
+ }
+
+ #menu-toggle{
+    display: none;
+ }
+
+
+   /* ---------------------------------------------------------------------------------------- */
+  /* responsive styles */
+  @media (max-width: 900px){
+    .book-content {
+        max-width: 60vw;
+    }
+  }
+
+  @media (max-width: 700px){
+    .book-content{
+        max-width: 90vw;
+    }
+
+    nav .toggle-close, .toggle-open {
+        display: block;
+    }
+    nav .toggle-close{
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+
+    .nav-menu{
+        display: none;
+        position: absolute;
+        flex-direction: column;
+        color: var(--text-color);
+        left: 5px;
+        right: 5px;
+        background-color: var(--secondary-color);
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        top: 10px;
+        padding: 20px;
+    }
+
+    nav #menu-toggle[type = "checkbox"]:checked ~ .nav-menu{
+        display: flex;
+    }
+
+  }
+
+
+  @media (max-width: 550px){
+    .book-content{
+        max-width: 90vw;
+        flex-wrap: wrap;
+    }
+    .book-notes{
+        margin: 0 1rem;
+    }
+  }

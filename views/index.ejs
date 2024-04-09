@@ -1,25 +1,66 @@
 <%- include('partials/header.ejs'); %>
 
-<hr>
-<a href="/add">Add new</a>
-<hr>
-<% books.forEach( b => { %>
-    <img src="https://covers.openlibrary.org/b/isbn/<%= b.isbn %>-M.jpg" alt="Image for <%= b.title %>">
-    <h1><%= b.title %></h1>
-    <% if(b.notes.length > 100){ %> 
-        <h1><%= b.notes.substring(0, 100); %> 
-            <a href="/book/<%= b.id %>">Read More</a> 
-        </h1>
-    <% } else { %> 
-        <h1><%= b.notes %></h1>
-    <% } %>
-    <h1><%= b.author %></h1>
-    <h1><%= b.rating %></h1>
-    <h1><%= b.isbn %></h1>
-    <h1><%= b.date %></h1>
-    <a href="/edit/<%= b.id %>">Edit</a>
-    <a href="/delete/<%= b.id %>">Delete</a>
-    <hr>
-<%}); %>
+<div class="container main-section">
+    <% books.forEach( b => { %>
+        <div class="book-content">
+            <div class="book-img">
+                <img src="https://covers.openlibrary.org/b/isbn/<%= b.isbn %>-M.jpg" alt="Image for <%= b.title %>">
+            </div>
+            <div class="book-notes">
+                <h2><%= b.title %></h2>
+                <% if(b.notes.length > 250){ %> 
+                    <p><%= b.notes.substring(0, 250); %> 
+                        <a class="btn" href="/book/<%= b.id %>">Read More</a> 
+                    </p>
+                <% } else { %> 
+                    <p><%= b.notes %></p>
+                <% } %>
+                <div class="info-row">
+                    <h4 class="author">
+                        <%= b.author %>
+                    </h4>
+                    <h5 class="date">
+                        <%= b.date %>
+                    </h5>
+                </div>
+                <div class="bottom-row">
+                    <div class="star-rating" >
+                        <input type="radio" id="st-5-<%= b.id %>" value="5" name="rating-<%= b.id %>" disabled>
+                        <label for="st-5">
+                            <span class="fa fa-star"></span>
+                        </label>
+                        <input type="radio" id="st-4-<%= b.id %>" value="4" name="rating-<%= b.id %>" disabled>
+                        <label for="st-4">
+                            <span class="fa fa-star"></span>
+                        </label>
+                        <input type="radio" id="st-3-<%= b.id %>" value="3" name="rating-<%= b.id %>" disabled>
+                        <label for="st-3">
+                            <span class="fa fa-star"></span>
+                        </label>
+                        <input type="radio" id="st-2-<%= b.id %>" value="2" name="rating-<%= b.id %>" disabled>
+                        <label for="st-2">
+                            <span class="fa fa-star"></span>
+                        </label>
+                        <input type="radio" id="st-1-<%= b.id %>" value="1" name="rating-<%= b.id %>" disabled required> 
+                        <label for="st-1">
+                            <span class="fa fa-star"></span>
+                        </label>
+                    </div>
+                    <a class="btn" href="/edit/<%= b.id %>">Edit</a>
+                    <a class="btn" href="/delete/<%= b.id %>">Delete</a>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var ratingInput = document.querySelector('.star-rating input#st-' + '<%= b.rating %>' + '-' + '<%= b.id %>');
+                // console.log("Rating input:", ratingInput); // Log ratingInput variable
+                if (ratingInput) {
+                    ratingInput.checked = true;
+                }
+            });
+        </script>
+    <%}); %>
+</div>
 
 <%- include('partials/footer.ejs'); %>
