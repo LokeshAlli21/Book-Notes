@@ -20,15 +20,19 @@ Book Notes - A website that helps you to save notes and description about books.
 
 How to run this Application?
 
-Initialize NPM
+#### Follow the Steps :
+
+1. Make sure you have installed postgres on your PC/laptop.
+2. change pg client password with your own password in index.js file.
+3. Initialize NPM
 ```bash
 npm init -y
 ```
-install npm modules
+4. install npm modules
 ```bash
 npm i
 ```
-Now Run index.js with node or nodemon..
+5. Now Run index.js with node or nodemon..
 ```bash
 node index.js
 ```
