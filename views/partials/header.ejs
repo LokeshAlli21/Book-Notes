@@ -25,10 +25,69 @@
                     <a href="/">Home</a>
                 </li>
                 <li>
-                    <button class="btn">
-                        <a class="btn-add" href="/add">+ Add</a>
-                    </button>
+                    <a class="btn-add" href="/add">+ Add</a>
                 </li>
+                <% if(locals.books){ %>
+                    <li class="sort-dropdown">
+                        <div class="btn-sort">
+                            <a>Sort by <i class="fa fa-caret-down"></i></a> 
+                        </div>
+                        
+                        <form action="/sort" method="post" class="form-sort">
+                            <label for="input-date" class="sort-item sort-hover">
+                                <input class="radio-sort" type="radio" name="category" value="date" id="input-date" onclick="this.form.submit()">
+                                Date
+                            </label>
+                            <label for="input-title" class="sort-item sort-hover">
+                                <input class="radio-sort" type="radio" name="category" value="title" id="input-title" onclick="this.form.submit()">
+                                Title
+                            </label>
+                            <label for="input-rating" class="sort-item sort-hover">
+                                <input class="radio-sort" type="radio" name="category" value="rating" id="input-rating" onclick="this.form.submit()">
+                                Rating
+                            </label>
+                            <div class="sort-item sort-order">
+                                <label for="input-ASC" class="sort-hover">
+                                    <input class="radio-sort" type="radio" name="order" id="input-ASC" value="ASC" checked>
+                                    ASC
+                                </label>
+                                <label for="input-DESC" class="sort-hover">
+                                    <input class="radio-sort" type="radio" name="order" id="input-DESC" value="DESC" >
+                                    DESC
+                                </label>
+                            </div>
+                        </form>
+                    </li>
+                    <script>
+                        document.querySelector(`label[for=input-ASC]`).classList.add('checked');
+                
+                        document.querySelector('.sort-order').addEventListener('click', function(event) {
+                            // Remove 'checked' class from both ASC and DESC labels
+                            document.querySelector('label[for="input-ASC"]').classList.remove('checked');
+                            document.querySelector('label[for="input-DESC"]').classList.remove('checked');
+                            
+                            // Find the clicked radio button and add 'checked' class to its associated label
+                            const clickedRadioButton = event.target.closest('input[type="radio"]');
+                            if (clickedRadioButton) {
+                                const labelForClickedRadioButton = document.querySelector(`label[for="${clickedRadioButton.id}"]`);
+                                if (labelForClickedRadioButton) {
+                                    labelForClickedRadioButton.classList.add('checked');
+                                }
+                            }
+                        });
+                
+                    </script>
+                    <% if(locals.sort) { %> 
+                        <script>
+                            document.querySelector(`label[for=input-ASC]`).classList.remove('checked');
+                        </script>
+                        <% sort.forEach( s => { %>
+                            <script>
+                                var element = document.querySelector(`label[for=input-<%= s %>]`).classList.add('checked');
+                            </script>
+                        <% }); %>
+                    <% } %>
+                <% } %>
                 <!-- <li>
                     <a href="/">other menu</a>
                 </li> -->

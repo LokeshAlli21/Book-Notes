@@ -1,6 +1,6 @@
 <%- include('partials/header.ejs'); %>
 
-<div class="container">
+<div class="container section">
     <% if (locals.book) { %>
         <form class="form-input" action="/edit/<%= book.id %>" method="post">
             <label for="title" class="input-field input-title">

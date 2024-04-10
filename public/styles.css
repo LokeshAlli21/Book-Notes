@@ -34,13 +34,19 @@ body {
     background-color: var(--background-color);
     margin: 0;
     padding: 0;
+    min-height: 100vh;
+    
+}
+
+.section{
+    min-height: 100vh;
 }
 
 .container {
     max-width: 1000px;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
+    align-items: center;
     /* justify-content: space-around; */
     margin: 0 auto;
     gap: 3vh;
@@ -94,7 +100,7 @@ li{
     display: flex;
     flex-direction: column;
     /* width: 60vw; */
-    gap: 1rem;[]
+    gap: 1rem;
     background-color: var(--card-background-color);
     /* height: fit-content; */
     margin: 0 auto;
@@ -104,6 +110,7 @@ li{
     border-radius: 20px;
     border: 1px solid var(--border-color);
     font-size: 1.5rem;
+    max-width: 95%;
 }
 .b-detail-container{
     padding: 1rem;
@@ -204,6 +211,7 @@ li{
     top: 2vh;
 }
 
+
 .book-content {
     display: flex;
     flex-direction: row;
@@ -287,6 +295,34 @@ li{
 .bottom-row h1 {
     font-size: 20px;
     margin: 0;
+}
+
+/* ---------------------------------------------------------------------------------------- */
+/* footer.ejs styles */
+footer{
+    padding: 50px;
+    background-color: var(--primary-color);
+    margin-top: 4vh;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-menu {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.footer-menu a{
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: all 0.2s ease-in-out;
+}
+.footer-menu a:hover{
+    color: var(--accent-color);
 }
 
 /* ---------------------------------------------------------------------------------------- */
@@ -390,6 +426,66 @@ li{
  }
 
 
+ .radio-sort{
+    display: none;
+}
+
+.sort-dropdown{
+    overflow: hidden;
+}
+
+.btn-sort{
+    display: block;
+    min-width: 160px;
+    text-align: center;
+    color: var(--background-color);
+    font-weight: 600;
+    font-size: 1.2rem;
+    transition: add 0.2s ease-in-out;
+}
+
+.btn-sort:hover,.btn-sort:hover a{
+    color: var(--text-color);
+}
+
+.form-sort{
+    display: none;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 10000;
+    min-width: 160px;
+    background-color: var(--background-color);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.sort-dropdown:hover .form-sort{
+    display: flex;
+}
+.sort-item{ 
+    width: 100%;
+}
+.sort-hover{
+    padding: 10px;
+}
+.sort-hover:hover{
+    background-color: #c4c8ca;
+}
+
+.sort-order{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0;
+}
+
+.checked{
+    background-color: #c4c8ca;
+}
    /* ---------------------------------------------------------------------------------------- */
   /* responsive styles */
 

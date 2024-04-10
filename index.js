@@ -6,7 +6,7 @@ const db = new pg.Client({
     user: 'postgres',
     host: 'localhost',
     database: 'Book Notes',
-    password: '******',
+    password: '********',
     port: 5432
 });
 
@@ -89,10 +89,19 @@ app.post('/add',async (req, res) => {
     const author = req.body.author;
     const rating = parseInt(req.body.rating);
     const isbn = req.body.isbn;
+    
+    
     const date = new Date();
+    const day = String(date.getDate()).padStart(2, '0'); // Get day and pad with leading zero if necessary
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Get month (+1 because months are zero-indexed) and pad with leading zero if necessary
+    const year = date.getFullYear(); // Get full year
+    const hours = String(date.getHours()).padStart(2, '0'); // Get hours and pad with leading zero if necessary
+    const minutes = String(date.getMinutes()).padStart(2, '0'); // Get minutes and pad with leading zero if necessary
+    const seconds = String(date.getSeconds()).padStart(2, '0'); // Get seconds and pad with leading zero if necessary
+    var formattedDateTime = `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
 
     try {
-        await db.query('insert into books (title, notes, author, rating, isbn, date) values ($1, $2, $3, $4, $5, $6)', [title, notes, author, rating, isbn, date]);
+        await db.query('insert into books (title, notes, author, rating, isbn, date) values ($1, $2, $3, $4, $5, $6)', [title, notes, author, rating, isbn, formattedDateTime]);
     } catch (err) {
         console.log('error inserting data!', err.stack);
     }
@@ -121,6 +130,45 @@ app.get('/book/:id', (req, res) => {
     const id = parseInt(req.params.id);
     const book = books.find( b => b.id == id);
     res.render('view_notes.ejs', {book: book});
+});
+
+app.post('/sort',async (req, res) => {
+    const category = req.body.category;
+    const order = req.body.order;
+
+    let query = 'select * from books order by ';
+    
+    switch (category) {
+        case 'title':
+            query = query + 'title ';
+            break;
+        case 'rating':
+            query = query + 'rating ';
+            break;
+        case 'date':
+            query = query + 'date ';
+            break;
+        
+        default:
+            break;
+    }
+    if (order == 'ASC') {
+        query = query + 'ASC';
+    } else if (order == 'DESC') {
+        query = query + 'DESC';
+    }
+
+    query = query + ';';
+
+    try {
+        const result = await db.query(query);
+        // console.log(query);
+        books = result.rows;
+        res.render('index.ejs', {books: books, sort: [category, order]});
+    } catch (err) {
+        console.log('error sorting books !', err.stack);
+    }
+
 });
 
 app.listen(port, () => {
