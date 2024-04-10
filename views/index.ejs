@@ -4,7 +4,9 @@
     <% books.forEach( b => { %>
         <div class="book-content">
             <div class="book-img">
-                <img src="https://covers.openlibrary.org/b/isbn/<%= b.isbn %>-M.jpg" alt="Image for <%= b.title %>">
+                <a href="/book/<%= b.id %>">
+                    <img src="https://covers.openlibrary.org/b/isbn/<%= b.isbn %>-M.jpg" alt="Image for <%= b.title %>">
+                </a>
             </div>
             <div class="book-notes">
                 <h2><%= b.title %></h2>
