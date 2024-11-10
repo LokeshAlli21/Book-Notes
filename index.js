@@ -17,6 +17,7 @@ const port = process.env.PORT || 3000;
 app.use(cors()); // Add this line to enable CORS
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json()); // Handle JSON requests
 app.use(express.static('public'));
 
 let books = [];
@@ -35,8 +36,7 @@ async function getBooks() {
 // Route to render the index page
 app.get('/', async (req, res) => {
     await getBooks();
-    // res.render('index.ejs', { books });
-    res.send('working')
+    res.render('index.ejs', { books });
 });
 
 // Route to edit a book
