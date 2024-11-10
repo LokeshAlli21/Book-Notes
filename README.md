@@ -1,42 +1,55 @@
+# Book Notes App
 
-# Book Notes
+This is a simple web application that allows users to manage books, including adding, editing, deleting, and viewing books with their notes. The app uses **Supabase** as the backend and **Express** for server-side logic.
 
-Book Notes - A website that helps you to save notes and description about books.
-- Open Library Covers API : Utilizing the open library covers api to fetch the book covers by ISBN, for representation of each book.
-- ADD, Edit and Delete : Users can easily add new books to their collection, edit existing book notes or details OR remove books from list.
-- Sort Feature : The ability to sort book notes based on various criteria such as title, given rating and added date in ASC and DESC order.
-- User Interface : This project provides better User Interface and User Experience, by ensuring responsiveness across different devices.
-## Used Tools & Technologies 
-- PostgreSQL : This project is mainly focuses on providing better CRUD featurs by PostgreSQL. 
-- Express.js and Node.js : The backend of this project uses Express.js and Node.js for developing backend application and interacting with http protocols.
-- EJS : Embedded JavaScript(EJS) is used as templating language.
-- Fron-End : As usual the frontend technologies are HTML, CSS and JavaScript.
-## Screenshots
+## Features
 
-![App Screenshot](https://github.com/LokeshAlli21/Book-Notes/blob/master/screenshots/1.png)
+- **View Books**: List all books.
+- **Add a Book**: Add new books with details like title, author, rating, notes, and ISBN.
+- **Edit a Book**: Update book details.
+- **Delete a Book**: Remove books from the list.
+- **Sort Books**: Sort books by title, rating, or date.
+- **View Book Details**: View notes and details for each book.
 
-![App Screenshot](https://github.com/LokeshAlli21/Book-Notes/blob/master/screenshots/5.png)
-## Installation
+## Technologies Used
 
-How to run this Application?
+- **Frontend**: EJS, HTML, CSS
+- **Backend**: Express.js
+- **Database**: Supabase (PostgreSQL)
 
-#### Follow the Steps :
+## Setup
 
-1. Make sure you have installed postgres on your PC/laptop.
-2. change pg client password with your own password in index.js file.
-3. Initialize NPM
-```bash
-npm init -y
-```
-4. install npm modules
-```bash
-npm i
-```
-5. Now Run index.js with node or nodemon..
-```bash
-node index.js
-```
-OR
-```bash
-nodemon index.js
-```
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/LokeshAlli21/Book-Notes.git
+    cd Book-Notes
+    ```
+
+2. Install dependencies:
+
+    ```bash
+    npm install
+    ```
+
+3. Create a `.env` file in the root directory and add your **Supabase** credentials:
+
+    ```
+    SUPABASE_KEY=your_supabase_key
+    ```
+
+4. Run the app locally:
+
+    ```bash
+    npm start
+    ```
+
+5. Access the app in your browser at `http://localhost:3000`.
+
+## Deployment
+
+This app is deployed on Vercel. You can deploy it by connecting your GitHub repository to Vercel.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
