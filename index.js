@@ -128,9 +128,9 @@ app.post('/sort', async (req, res) => {
 });
 
 
-app.listen(port, () => {
-    console.log(`Server is started on port ${port}`);
-});
+// app.listen(port, () => {
+//     console.log(`Server is started on port ${port}`);
+// });
 
 // Export the Express app as a serverless function
 export default app;
