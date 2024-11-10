@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
+import cors from 'cors';  // Import CORS package
 
 dotenv.config();  // Load environment variables
 
@@ -11,6 +12,10 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+// Enable CORS for all routes
+app.use(cors()); // Add this line to enable CORS
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
@@ -126,11 +131,6 @@ app.post('/sort', async (req, res) => {
         console.log('Error sorting books!', err.message);
     }
 });
-
-
-// app.listen(port, () => {
-//     console.log(`Server is started on port ${port}`);
-// });
 
 // Export the Express app as a serverless function
 export default app;
