@@ -49,7 +49,3 @@ This is a simple web application that allows users to manage books, including ad
 ## Deployment
 
 This app is deployed on Vercel. You can deploy it by connecting your GitHub repository to Vercel.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
