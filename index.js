@@ -35,7 +35,8 @@ async function getBooks() {
 // Route to render the index page
 app.get('/', async (req, res) => {
     await getBooks();
-    res.render('index.ejs', { books });
+    // res.render('index.ejs', { books });
+    res.send('working')
 });
 
 // Route to edit a book
