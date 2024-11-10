@@ -3,20 +3,20 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
 
-dotenv.config(); // Load environment variables
+dotenv.config();  // Load environment variables
 
 const supabaseUrl = 'https://pdzxhalfjylizdatebhz.supabase.co';
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const app = express();
-const port = 3000;
-
+const port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 let books = [];
 
+// Function to fetch books from Supabase
 async function getBooks() {
     try {
         const { data, error } = await supabase.from('books').select('*');
@@ -27,17 +27,20 @@ async function getBooks() {
     }
 }
 
+// Route to render the index page
 app.get('/', async (req, res) => {
     await getBooks();
     res.render('index.ejs', { books });
 });
 
+// Route to edit a book
 app.get('/edit/:id', (req, res) => {
     const id = parseInt(req.params.id);
-    const book = books.find(b => b.id == id);
+    const book = books.find(b => b.id === id);
     res.render('new.ejs', { book });
 });
 
+// Route to update a book
 app.post('/edit/:id', async (req, res) => {
     const id = parseInt(req.params.id);
     const fieldsToUpdate = {};
@@ -61,10 +64,12 @@ app.post('/edit/:id', async (req, res) => {
     res.redirect('/');
 });
 
+// Route to render add book page
 app.get('/add', (req, res) => {
     res.render('new.ejs');
 });
 
+// Route to add a book
 app.post('/add', async (req, res) => {
     const { title, notes, author, rating, isbn } = req.body;
     const formattedDateTime = new Date().toISOString();
@@ -81,6 +86,7 @@ app.post('/add', async (req, res) => {
     res.redirect('/');
 });
 
+// Route to delete a book
 app.get('/delete/:id', async (req, res) => {
     const id = parseInt(req.params.id);
 
@@ -94,12 +100,14 @@ app.get('/delete/:id', async (req, res) => {
     res.redirect('/');
 });
 
+// Route to view a specific book
 app.get('/book/:id', (req, res) => {
     const id = parseInt(req.params.id);
-    const book = books.find(b => b.id == id);
+    const book = books.find(b => b.id === id);
     res.render('view_notes.ejs', { book });
 });
 
+// Route to sort books
 app.post('/sort', async (req, res) => {
     const { category, order } = req.body;
 
@@ -119,6 +127,10 @@ app.post('/sort', async (req, res) => {
     }
 });
 
+
 app.listen(port, () => {
     console.log(`Server is started on port ${port}`);
 });
+
+// Export the Express app as a serverless function
+export default app;
