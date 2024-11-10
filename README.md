@@ -46,6 +46,3 @@ This is a simple web application that allows users to manage books, including ad
 
 5. Access the app in your browser at `http://localhost:3000`.
 
-## Deployment
-
-This app is deployed on Vercel. You can deploy it by connecting your GitHub repository to Vercel.
