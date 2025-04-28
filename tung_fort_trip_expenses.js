@@ -12,7 +12,7 @@ const expenses = [
   { amount: 10, paidFor: 'Tea ☕' },
   { amount: 40, paidFor: 'Lemon Sharbat 🍋' },
   { amount: 30, paidFor: 'Drinks (Thumbs Up ₹20 for Satish + Chaas ₹10 for me) 🥤' },
-  { amount: 15, paidFor: 'Vada Pav 🍔' },
+  { amount: 15, paidFor: 'Vada Pav 🍔 (Satish Personal)' },
   { amount: 40, paidFor: 'Sugarcane Juice 🍹' },
   { amount: 20, paidFor: 'Cucumber 🥒' },
   { amount: 50, paidFor: 'Coconut Water 🥥' },
@@ -24,28 +24,30 @@ const expenses = [
 // Total amount spent by me
 const totalSpent = expenses.reduce((total, expense) => total + expense.amount, 0); // ₹1335
 
-// Decisions for splitting
+// Personal expenses (not shared)
 const personalExpenses = [
   { amount: 20, paidFor: 'Thumbs Up 🍻 (Satish\'s Personal)' },
-  { amount: 10, paidFor: 'Chaas 🥛 (My Personal)' }
+  { amount: 10, paidFor: 'Chaas 🥛 (My Personal)' },
+  { amount: 15, paidFor: 'Vada Pav 🍔 (Satish\'s Personal)' }
 ];
 
-const personalTotal = personalExpenses.reduce((total, expense) => total + expense.amount, 0); // ₹30
+const personalTotal = personalExpenses.reduce((total, expense) => total + expense.amount, 0); // ₹45
 
-const sharedTotal = totalSpent - personalTotal; // ₹1305
-const eachShare = sharedTotal / 2; // ₹652.5
+// Shared expenses (remaining after removing personal expenses)
+const sharedTotal = totalSpent - personalTotal; // ₹1290
+const eachShare = sharedTotal / 2; // ₹645
 
 // Final calculations for each person's share
 const finalAmounts = {
-  satish: eachShare + 10, // ₹662.5 (Chaas 🥛 for Satish)
-  me: eachShare + 20 // ₹672.5 (Thumbs Up 🍻 for me)
+  satish: eachShare + 20 + 15, // ₹680 (Thumbs Up + Vada Pav)
+  me: eachShare + 10 // ₹655 (Chaas)
 };
 
-// Output to share with Satish
+// Message to Satish
 const message = `
 Hey Satish,
 
-Here’s the detailed breakdown of our Tung Fort trip expenses and how we decided to split everything:
+Here’s the updated detailed breakdown of our Tung Fort, Pune trip expenses:
 
 Expenses Paid by Me:
 ${expenses.map(expense => `- ₹${expense.amount} for ${expense.paidFor}`).join('\n')}
@@ -54,28 +56,27 @@ Total Spent: ₹${totalSpent} 💰
 
 Decisions:
 - All payments were done by me (online + ₹60 cash).
-- We agreed to split the costs equally after the trip.
-- Personal items:
+- We agreed to split the common expenses equally after the trip.
+- Personal items (not shared):
   - Thumbs Up (₹20) → Your personal.
+  - Vada Pav (₹15) → Your personal.
   - Chaas (₹10) → My personal.
 
-Personal Expenses (Not Shared):
+Personal Expenses:
 ${personalExpenses.map(expense => `- ₹${expense.amount} for ${expense.paidFor}`).join('\n')}
 
-Personal Total: ₹${personalTotal}
+Total Personal Expenses: ₹${personalTotal}
 
 Amount to Split: ₹${sharedTotal}
-Each person’s share: ₹${eachShare} 🤝
+Each person’s share of common expenses: ₹${eachShare} 🤝
 
 Final Calculation:
-- Your final share = ₹${finalAmounts.satish} 💸
-- My final share = ₹${finalAmounts.me} 💸
+- Your final amount = ₹${finalAmounts.satish} 💸
+- My final amount = ₹${finalAmounts.me} 💸
 
-You can send ₹${finalAmounts.satish} whenever you’re ready. No rush! ⏳
+Please send ₹${finalAmounts.satish} whenever you’re ready. No hurry! ⏳
 
-Let me know if you need any clarifications or further details.
-
-Thanks! 🙏
+Thanks a lot, bro! It was a fun trip! Tung Fort memories are awesome! 📸
 `;
 
 // Send message
